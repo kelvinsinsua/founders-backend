@@ -37,7 +37,7 @@ class EntityCrudListener {
                             $entity->getReminderPhone(),
                             [
                                 'from' => $fromPhone,
-                                'body' => 'First Test'
+                                'body' => $entity->getReminderMessage()
                             ]
                         );
                         $entity->setSent(true);
