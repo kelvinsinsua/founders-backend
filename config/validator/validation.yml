@@ -1,0 +1,18 @@
+App\Entity\User:
+    properties:
+        email:
+            - Email:
+                message: The email "{{ value }}" is invalid.
+
+App\Entity\Reminder:
+    properties:
+        reminderEmail:
+            - Email:
+                message: The email "{{ value }}" is invalid.
+        reminderMessage:
+            - NotNull:
+                message: The message is required
+            - NotBlank:
+                message: The message is required
+            
+            
