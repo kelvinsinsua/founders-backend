@@ -33,17 +33,17 @@ class ReminderCommand extends Command {
   
    // For our app, we'll be sending reminders to everyone who has an appointment on this current day, shortly after midnight.
    // As such, the start and end times we'll be checking for will be 12:00am (00:00h) and 11:59pm (23:59h).
-   $start = new \DateTime(date("Y-m-d"));
+   $start = date("Y-m-d");
 
    // get appointments scheduled for today
    $reminders = $remindersRepository->createQueryBuilder('a')
                                          ->select('a')
-                                         //->where('a.reminderDate = :now')
+                                         ->where('a.reminderDate = :now')
                                          ->andWhere('a.sent = false')
                                          ->andWhere('a.sms = true')
-                                         //->setParameters(array(
-                                         //  'now' => $start,
-                                         //))
+                                         ->setParameters(array(
+                                           'now' => $start,
+                                         ))
                                          ->getQuery()
                                          ->getResult();
   
@@ -71,7 +71,7 @@ class ReminderCommand extends Command {
             
         }
         $r->setSent(true);
-        //$this->em->flush();
+        $this->em->flush();
     }
     
    } else {
